@@ -16,7 +16,7 @@ public class CentralAPI {
     
     public let router = Router()
     
-    var tasks: [Task] = []
+    let taskDatabase = TaskDatabase()
     
     let queue = DispatchQueue(label: "com.fullmetalfist.todo")
     
@@ -25,9 +25,10 @@ public class CentralAPI {
         router.get("/v1/tasks", handler: handleGetTasks)
         router.post("/v1/tasks", handler: handleAddTask)
         
-        tasks.append(
-            Task(id: UUID(), description: "Check emails", createdAt: Date(), isCompleted: false)
-        )
+        taskDatabase.addTask(task: Task(id: UUID(),
+                                  description: "Check emails",
+                                  createdAt: Date(),
+                                  isCompleted: false) ) { _ in } 
     }
 }
 
@@ -42,7 +43,11 @@ extension CentralAPI {
         
         Log.info("Hello")
         
-        response.status(.OK).send(json: JSON(tasks.stringValuePairs))
+        taskDatabase.getAllTasks { tasks in
+            response.status(.OK).send(json: JSON(tasks.stringValuePairs))
+        }
+        
+        
     }
     
     func handleAddTask(request: RouterRequest,
@@ -63,7 +68,9 @@ extension CentralAPI {
         let newTask = Task(id: UUID(), description: description, createdAt: Date(), isCompleted: false)
         
         queue.sync {
-            tasks.append(newTask)
+            taskDatabase.addTask(task: newTask) { _ in 
+                
+            }
             Log.info("Adding a task")
             
             response.status(.OK).send("Adding tasks")
