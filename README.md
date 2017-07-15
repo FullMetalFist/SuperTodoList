@@ -32,7 +32,7 @@ In Terminal visit the directory with this repo and type
 
 Type
     `swift build`
-Then
+then
     `.build/debug/SuperTodoList`
 
 Visit [localhost:8099/v1/tasks](http://localhost:8099/v1/tasks)
@@ -45,8 +45,7 @@ GET & POST routes at [http://localhost:8099/v1/tasks](http://localhost:8099/v1/t
 
 ## Contributors
 
-I'm on [Twitter](https://twitter.com/MVilabrera)
-
+I'm on [Twitter](https://twitter.com/MVilabrera) &
        [StackOverflow](https://stackoverflow.com/users/2533857/fullmetalfist)
 
 Any bugs or feature requests please send me an [issue](https://github.com/FullMetalFist/SuperTodoList/issues)
