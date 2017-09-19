@@ -25,10 +25,10 @@ public class CentralAPI {
         router.get("/v1/tasks", handler: handleGetTasks)
         router.post("/v1/tasks", handler: handleAddTask)
         
-        taskDatabase.addTask(task: Task(id: UUID(),
-                                  description: "Check emails",
-                                  createdAt: Date(),
-                                  isCompleted: false) ) { _ in } 
+//        taskDatabase.addTask(task: Task(id: UUID(),
+//                                  description: "Check emails",
+//                                  createdAt: Date(),
+//                                  isCompleted: false) ) { _ in } 
     }
 }
 
@@ -68,7 +68,7 @@ extension CentralAPI {
         let newTask = Task(id: UUID(), description: description, createdAt: Date(), isCompleted: false)
         
         queue.sync {
-            taskDatabase.addTask(task: newTask) { _ in 
+            taskDatabase.addTask(task: newTask) { _ in
                 
             }
             Log.info("Adding a task")
